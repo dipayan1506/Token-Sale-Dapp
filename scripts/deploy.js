@@ -1,5 +1,5 @@
 // import { ethers as _ethers } from "hardhat";
-const { ethers: _ethers } = require("hardhat");
+const hre = require("hardhat");
 
 
 
@@ -10,7 +10,7 @@ const tokens=(nToken)=>{
 async function main(){
     const _initialSupply = tokens(50000);
 
-    const TokenSale=await _ethers.
+    const TokenSale=await hre.ethers.
     getContractFactory("TokenSale");
 
 
@@ -24,6 +24,8 @@ async function main(){
     //TokenSaleContract deploy
 
     const _tokenPrice= tokens(1);
+    const TokenSaleContract=await hre.ethers.
+    getContractFactory("TokenSaleContract");
     const tokenSale=await TokenSaleContract.deploy(
         theBlockchain.address,_tokenPrice
     );
