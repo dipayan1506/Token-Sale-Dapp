@@ -50,7 +50,7 @@ export const StateContextProvider = ({ children }) => {
          let tokenbalance;
 
          if(account){
-            tokenbalance=await TOKEN_CONTRACT.balanceOf(account);
+            tokenbalance=await TOKEN_CONTRACT.balanceOf[account];
 
          }
          else{
@@ -64,8 +64,21 @@ export const StateContextProvider = ({ children }) => {
          const tokenTotalSupply=await TOKEN_CONTRACT.totalSupply();
          const tokenHolders=await TOKEN_CONTRACT._userId();
          const tokenStandard =await TOKEN_CONTRACT.standard();
-         const tokenAddress=await TOKEN_CONTRACT.address();
+         const tokenAddress=await TOKEN_CONTRACT.address;
          const tokenOwnerOfContract=await TOKEN_CONTRACT.ownerOfContract();
+
+         const nativeToken={
+            tokenAddress: tokenAddress,
+            tokenName:tokenName,
+            tokenSymbol:tokenSymbol,
+            tokenOwnerOfContract:tokenOwnerOfContract,
+            tokenStandard:tokenStandard,
+            tokenTotalSupply:ethers.utils.formatEther(tokenTotalSupply.toString()),
+            tokenbalance:ethers.utils.formatEther(tokenbalance.toString()),
+            tokenHolders:tokenHolders.toNumber(),
+
+         };
+         setNativeToken(nativeToken);
 
 
          
@@ -74,7 +87,10 @@ export const StateContextProvider = ({ children }) => {
       }catch(error){
          console.log(error);
       }
-   }
+   };
+   useEffect(()=>{
+    fetchInitialData();
+   },[])
 
 
 
