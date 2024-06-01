@@ -8,16 +8,16 @@ const tokens=(nToken)=>{
 };
 
 async function main(){
-    const _initialSupply = tokens(50000);
+    const _initialSupply = tokens(5000000);
 
     const TokenSale=await hre.ethers.
     getContractFactory("TokenSale");
 
 
-    const theBlockchain =await TokenSale.deploy(_initialSupply);
+    const tokensale =await TokenSale.deploy(_initialSupply);
 
-    await theBlockchain.deployed();
-    console.log(`TheBlockachain : ${theBlockchain.address}`);
+    await tokensale.deployed();
+    console.log(`TokenSale : ${tokensale.address}`);
 
 
 
@@ -26,14 +26,14 @@ async function main(){
     const _tokenPrice= tokens(1);
     const TokenSaleContract=await hre.ethers.
     getContractFactory("TokenSaleContract");
-    const tokenSale=await TokenSaleContract.deploy(
-        theBlockchain.address,_tokenPrice
+    const tokenSalecontract=await TokenSaleContract.deploy(
+        tokensale.address,_tokenPrice
     );
 
 
-    await tokenSale.deployed();
+    await tokenSalecontract.deployed();
 
-    console.log(`TokenSale: ${tokenSale.address}`);
+    console.log(`TokenSalecontract: ${tokenSalecontract.address}`);
 
    
 
