@@ -138,7 +138,46 @@ export const StateContextProvider = ({ children }) => {
    };
    useEffect(()=>{
     fetchInitialData();
-   },[])
+   },[]);
+
+
+   //BUY TOKEN
+   const buyToken=async(nToken)=>{
+      try{
+         const amount =ethers.utils.parseUnits(nToken,toString(),"ether");
+         const contract=await connectingTOKEN_SALE_CONTRACT();
+
+         const buying =await contract.buyToken(nToken,{
+            value:amount.toString(),
+
+         });
+         await buying.wait();
+         console.log(buying);
+         window.location.reload();
+
+
+      }
+      catch(error){
+         console.log(error);
+      }
+   }
+
+
+   //NATIVE TOKEN TRANSFER
+   const transferNativeToken =async ()=>{
+      try{
+         const TOKEN_SALE_ADDRESS="0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+         const TOKEN_AMOUNT= 500;
+         const tokens=TOKEN_AMOUNT.toString();
+         // const transferAmount=ethers 
+      }
+      catch(error){
+         console.log(error);
+      }
+
+   }
+
+
 
 
 
