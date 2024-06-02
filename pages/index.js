@@ -24,6 +24,7 @@ const index = () => {
      <Header address={address} setAddress={setAddress} connectWallet={connectWallet}></Header>
      <Banner transferNativeToken={transferNativeToken}/>
      <Service/>
+     <About/>
      <TokenSale buyToken={buyToken} tokenSale={tokenSale} />
      <Distribution />
      <MobileApp/>
