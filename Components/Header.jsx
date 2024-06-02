@@ -34,7 +34,7 @@ const Header = ({address,setAddress,connectWallet}) => {
   ];
 
   return (
-    <div className="header_wrap fixed-top">
+    <header className="header_wrap fixed-top">
       <div className="container-fluid">
         <nav className="navbar navbar-expand-lg">
           <a
@@ -116,7 +116,7 @@ const Header = ({address,setAddress,connectWallet}) => {
           </div>
         </nav>
       </div>
-    </div>
+    </header>
   );
 };
 
