@@ -47,7 +47,7 @@ export const StateContextProvider = ({ children }) => {
          //TOKEN CONTRACT
 
          const TOKEN_CONTRACT=await connectingTOKENCONTRACT();
-         let tokenbalance=0;
+         let tokenbalance;
          console.log(TOKEN_CONTRACT);
          if(account){
             tokenbalance=await TOKEN_CONTRACT.balanceOf(account);
@@ -56,7 +56,9 @@ export const StateContextProvider = ({ children }) => {
          else{
             tokenbalance=0;
          }
-   
+        
+
+         console.log(tokenbalance);
 
 
 
@@ -129,6 +131,12 @@ export const StateContextProvider = ({ children }) => {
          setTokenSale(tokenSale);
 
 
+         console.log(tokenSale);
+         console.log(currentHolder);
+         console.log(nativeToken);
+
+
+
 
 
 
@@ -169,7 +177,14 @@ export const StateContextProvider = ({ children }) => {
          const TOKEN_SALE_ADDRESS="0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
          const TOKEN_AMOUNT= 500;
          const tokens=TOKEN_AMOUNT.toString();
-         // const transferAmount=ethers 
+         const transferAmount=ethers.utils.parseEther(tokens);
+         
+         const contract=await connectingTOKENCONTRACT();
+         const transaction=await contract.transfer(TOKEN_SALE_ADDRESS,transferAmount);
+         console.log(contract);
+         await transaction.wait();
+         window.location.reload();
+
       }
       catch(error){
          console.log(error);
@@ -182,7 +197,19 @@ export const StateContextProvider = ({ children }) => {
 
 
   return (
-    <StateContext.Provider value={{ TOKEN_ICO }}>
+    <StateContext.Provider value={{ 
+      transferNativeToken, TOKEN_ICO,
+      currentHolder,
+      buyToken,
+      connectWallet,
+      setAddress,
+      tokenSale,
+      tokenHolders,
+      nativeToken,
+      balance,
+      address,
+      
+       }}>
     
       {children}
     </StateContext.Provider>
